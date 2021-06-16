@@ -65,7 +65,7 @@ fun main() {
 
 - Funcionalidades padrao criada de forma automatica(equals/hashCode/toString/copy):
 ```
-data class(
+data class Comida(
     val nome: String,
     val descricao: String
 )
@@ -78,35 +78,67 @@ fun main() {
 
 - uma funcao nao precisa estar atrelada a uma classe / um arquivo .kt pode ter varias classes e varias funcoes separadas:
 ```
+data class Pedido(
+    val id: Long,
+    val cliente: Cliente
+)
 
+data class Cliente(
+    val id: Long,
+    val nome: String
+)
+
+fun soma(x: Int, y: Int) = x + y
 ```
-
 - funcoes de extencao:
 ```
+fun String.incluirImpressao() = println("segue impressao: $this")
 
+fun main() {
+    "impresso ok".incluirImpressao()
+}
 ```
-
-- operador elvis:
+- Safe calls:
 ```
-
+val a = "Kotlin"
+val b: String? = null
+println(b?.length)
+println(a?.length) // Nao é necessario o "?" pois o atributo a concerteza nao é null
 ```
-
-- coroutines:
+- operador elvis: evita condicoes de verificacao de null
 ```
-
+val b: String? = null
+val l = b?.length ?: -1
 ```
-
 - Nao é necessario explicitar qual o tipo do atributo:
 ```
 val descricao = "descricao do tipo String"
 ```
-
 - funcoes sem um conjunto de operacoes nao precisam dos parenteses:
 ```
 fun obtemDescrFeijao(feijao: Comida) = feijao.descricao
 ```
+- metodo when():
+```
+when (x) {
+    1 -> print("x == 1")
+    in 2..5 -> print("x == 2 ou 3 ou 4 ou 5 ou 6")
+    else -> { // Note the block
+        print("x é diferente de 1 a 5")
+    }
+}
 
-- metodo whe():
+//caso seja uma String verifica se inicia com o prefixo inicio
+fun hasPrefix(x: Any) = when(x) {
+    is String -> x.startsWith("inicio")
+    else -> false
+}
 ```
 
-```
+# Api Rest
+Ferramentas utilizadas:
+ - Kotlin
+ - Spring Boot
+ - spring Data
+ - Gradle
+ - H2
