@@ -29,16 +29,6 @@ fun main() {
     print("modelo: ${samsungS10.modelo}")
 }
 ```
-
-- Null Safety, ou seja, por padrao os atributos nao aceitam nulos evitando assim o famoso NullPointerException:
-```
-class Comida(
-    //nao aceita null
-    val nome: String,
-    //aceita null
-    val descricao: String?
-)
-```
 - A imutabilidade é mais natural com o uso de val:
 ```
 fun main() {
@@ -49,7 +39,29 @@ fun main() {
     comida = "Arroz" //é mutavel por conta do "var"
 }
 ```
+- Null Safety, ou seja, por padrao os atributos nao aceitam nulos evitando assim o famoso NullPointerException:
+```
+class Comida(
+    //nao aceita null
+    val nome: String,
+    //aceita null
+    val descricao: String?
+)
+```
+- Nao é necessario explicitar qual o tipo do atributo:
+```
+val descricao1 = "descricao do tipo String"
+val descricao2: String = "descricao do tipo String"
 
+val comida1 = Comida("feijao", null)
+val comida2: Comida = Comida("feijao", null)
+```
+- funcoes sem um conjunto de operacoes nao precisam dos parenteses:
+```
+fun soma(x: Int, y: Int) = x+y
+
+fun obtemDescrFeijao(feijao: Comida) = feijao.descricao
+```
 - A classe com atributos primarios ja cria o construtor:
 ```
 class Comida(
@@ -78,17 +90,20 @@ fun main() {
 
 - uma funcao nao precisa estar atrelada a uma classe / um arquivo .kt pode ter varias classes e varias funcoes separadas:
 ```
+Pedido.kt
+
 data class Pedido(
     val id: Long,
-    val cliente: Cliente
+    val detalhesPedido: DetalhesPedido
 )
 
-data class Cliente(
+data class DetalhesPedido(
     val id: Long,
-    val nome: String
+    val nome: String,
+    val qtdProdutos: Short,
+    val dataCriacao: LocalDate
 )
 
-fun soma(x: Int, y: Int) = x + y
 ```
 - funcoes de extencao:
 ```
@@ -107,30 +122,23 @@ println(a?.length) // Nao é necessario o "?" pois o atributo a concerteza nao �
 ```
 - operador elvis: evita condicoes de verificacao de null
 ```
-val b: String? = null
-val l = b?.length ?: -1
+val bola: String? = null
+val resultado = bola ?: -1
 ```
-- Nao é necessario explicitar qual o tipo do atributo:
-```
-val descricao = "descricao do tipo String"
-```
-- funcoes sem um conjunto de operacoes nao precisam dos parenteses:
-```
-fun obtemDescrFeijao(feijao: Comida) = feijao.descricao
-```
+
 - metodo when():
 ```
 when (x) {
     1 -> print("x == 1")
-    in 2..5 -> print("x == 2 ou 3 ou 4 ou 5 ou 6")
-    else -> { // Note the block
+    in 2..5 -> print("x == 2 ou 3 ou 4 ou 5")
+    else -> {
         print("x é diferente de 1 a 5")
     }
 }
 
 //caso seja uma String verifica se inicia com o prefixo inicio
-fun hasPrefix(x: Any) = when(x) {
-    is String -> x.startsWith("inicio")
+fun startPrefixC(atr: Any) = when(atr) {
+    is String -> atr.startsWith("c")
     else -> false
 }
 ```
