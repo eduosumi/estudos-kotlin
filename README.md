@@ -134,3 +134,6 @@ fun hasPrefix(x: Any) = when(x) {
     else -> false
 }
 ```
+
+Exemplos de cogigo constam em outro repositorio:
+https://github.com/eduosumi/GftLoversApi
