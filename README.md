@@ -134,11 +134,3 @@ fun hasPrefix(x: Any) = when(x) {
     else -> false
 }
 ```
-
-# Api Rest
-Ferramentas utilizadas:
- - Kotlin
- - Spring Boot
- - spring Data
- - Gradle
- - H2
