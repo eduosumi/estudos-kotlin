@@ -142,6 +142,3 @@ fun startPrefixC(atr: Any) = when(atr) {
     else -> false
 }
 ```
-
-Exemplos de cogigo constam em outro repositorio:
-https://github.com/eduosumi/GftLoversApi
