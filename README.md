@@ -59,7 +59,7 @@ fun soma(x: Int, y: Int): Int = x+y
 ```
 fun soma(x: Int, y: Int) = x+y
 ```
-4 - Nao é necessario explicitar qual o tipo do atributo:
+4.2 - Nao é necessario explicitar qual o tipo do atributo(Inferencia de tipo):
 ```
 val descricao1 = "descricao do tipo String"
 val descricao2: String = "descricao do tipo String"
@@ -67,17 +67,11 @@ val descricao2: String = "descricao do tipo String"
 val comida1 = Comida("feijao", null)
 val comida2: Comida = Comida("feijao", null)
 ```
-5 - funcoes sem um conjunto de operacoes nao precisam dos parenteses:
-```
-fun soma(x: Int, y: Int) = x+y
-
-fun obtemDescrFeijao(feijao: Comida) = feijao.descricao
-```
-6 - A classe com atributos primarios ja cria o construtor:
+6 - A classe com atributos primarios ja cria o construtor, getters e setters:
 ```
 class Comida(
     val nome: String,
-    val descricao: String
+    val curiosidade: String
 )
 
 fun main() {
@@ -116,28 +110,43 @@ data class DetalhesPedido(
 )
 
 ```
-9 - funcoes de extencao:
+9 - funcoes de extencao - pode ser usada em qualquer classe:
 ```
 fun String.incluirImpressao() = println("segue impressao: $this")
 
 fun main() {
     "impresso ok".incluirImpressao()
 }
+
+class Comida(
+    val nome: String
+)
+
+fun Comida.nomeComposto() = this.nome+" composicao"
 ```
-10 - Safe calls:
+10.0 - Safe calls:
 ```
 val a = "Kotlin"
 val b: String? = null
 println(b?.length)
 println(a?.length) // Nao é necessario o "?" pois o atributo a concerteza nao é null
 ```
-11 - operador elvis: evita condicoes de verificacao de null
+10.1 - operador !!(double bang):
+```
+class Comida(val nome: String)
+
+fun main() {
+    val c: Comida? = Comida("arroz")
+    println(c!!.nome)
+}
+```
+11 - operador elvis: evita condicoes de verificacao de null. Ele é equivalente ao if ternario verificando se nao é nulo
 ```
 val bola: String? = null
 val resultado = bola ?: -1
 ```
 
-12 - metodo when():
+12 - metodo when() - parecido com o switch case do Java:
 ```
 when (x) {
     1 -> print("x == 1")
@@ -153,3 +162,5 @@ fun startPrefixC(atr: Any) = when(atr) {
     else -> false
 }
 ```
+
+13 - Lazy Initialization - atributos/objetos inicializados de forma lento, ou seja, é inicializado somente quando for necessario/utilizado
